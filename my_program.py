@@ -249,7 +249,7 @@ for file_name in files:
     gray_image = cv2.cvtColor(src=image, code=cv2.COLOR_BGR2GRAY)
     gaussian_image = cv2.GaussianBlur(src=gray_image, ksize=(3, 3), sigmaX=3)
 
-    tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
+    pytesseract.pytesseract.tesseract_cmd = r'D:\Program Files\Tesseract-OCR\tesseract.exe'
     custom_config = r'--psm 6'
     text = pytesseract.image_to_string(image=gaussian_image, lang='rus', config=custom_config)
 
@@ -261,11 +261,11 @@ for file_name in files:
     if matches_invoices:
         invoice = Invoice(document=text)
         func_invoice_read(text)
-        print(text)
+        # print(text)
     elif matches_waybills:
         waybill = Waybill(document=text)
         func_waybill_read(text)
-        print(text)
+        # print(text)
 
 print(dict_data)
 invoice_df = pd.DataFrame(data=dict_data)
